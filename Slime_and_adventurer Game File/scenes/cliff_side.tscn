@@ -77,7 +77,7 @@ sources/1 = SubResource("TileSetAtlasSource_nb1vs")
 sources/2 = SubResource("TileSetAtlasSource_qrb8k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7eibb"]
-size = Vector2(41, 29)
+size = Vector2(41, 31.5)
 
 [node name="cliff_side" type="Node2D"]
 script = ExtResource("1_ko60p")
@@ -109,10 +109,10 @@ polygon = PackedVector2Array(32, 30, 116, 30, 160, 29, 161, 96, 152, 100, 146, 1
 [node name="cliffside_exitpoint" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_exitpoint"]
-position = Vector2(87, 160)
+position = Vector2(87, 158.75)
 shape = SubResource("RectangleShape2D_7eibb")
 
 [node name="player" parent="." instance=ExtResource("5_waxa7")]
-position = Vector2(87, 136)
+position = Vector2(86, 132)
 
 [connection signal="body_entered" from="cliffside_exitpoint" to="." method="_on_cliffside_exitpoint_body_entered"]

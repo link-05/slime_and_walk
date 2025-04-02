@@ -123,13 +123,12 @@ position = Vector2(193.05, -14.5313)
 position = Vector2(4.95, -2.4687)
 shape = SubResource("RectangleShape2D_q3f2n")
 
-[node name="flat_road_point" type="Area2D" parent="."]
+[node name="narrow_path_transition_point" type="Area2D" parent="."]
 position = Vector2(410, 101)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="flat_road_point"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="narrow_path_transition_point"]
 position = Vector2(22.25, 0)
 shape = SubResource("RectangleShape2D_q3f2n")
 
 [connection signal="body_entered" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_entered"]
-[connection signal="body_exited" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_exited"]
-[connection signal="body_entered" from="flat_road_point" to="." method="_on_cliffside_transition_point_body_entered"]
+[connection signal="body_entered" from="narrow_path_transition_point" to="." method="_on_narrow_path_transition_point_body_entered"]

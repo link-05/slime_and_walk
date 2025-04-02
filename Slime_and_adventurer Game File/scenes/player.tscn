@@ -461,27 +461,29 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="narrow_path_camera" type="Camera2D" parent="."]
-position = Vector2(3, -12)
+position = Vector2(3, 0)
 zoom = Vector2(4, 4)
-limit_left = 370
-limit_top = 214
-limit_right = 1279
-limit_bottom = 555
+limit_left = 375
+limit_top = 211
+limit_right = 1272
+limit_bottom = 548
 limit_smoothed = true
 rotation_smoothing_enabled = true
 
 [node name="cliffside_camera" type="Camera2D" parent="."]
-position = Vector2(1, -4)
+position = Vector2(0, -1)
 zoom = Vector2(4, 4)
-limit_left = -70
-limit_top = -70
-limit_right = 300
-limit_bottom = 206
+limit_left = -135
+limit_top = -50
+limit_right = 240
+limit_bottom = 250
 limit_smoothed = true
 rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="flat_road_camera" type="Camera2D" parent="."]
-position = Vector2(2, -8)
+position = Vector2(1, 0)
 zoom = Vector2(4, 4)
 limit_left = -70
 limit_top = -70
