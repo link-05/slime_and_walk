@@ -4,6 +4,15 @@ var player_current_attack = false
 
 var current_scene = "world" #world cliff_side
 
+func scene_to_world():
+	current_scene = "world";
+func scene_to_cliffside():
+	current_scene = "cliffside";
+func scene_to_narrowpath():
+	current_scene = "narrowpath";
+func scene_to_flatroad():
+	current_scene = "flatroad";
+
 #func finish_changescenes_world_and_cliff_side():
 	#if transition_scene == true:
 		#if current_scene == "world":

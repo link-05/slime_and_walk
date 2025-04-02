@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://wuw4fvo7s4t5"]
+[gd_scene load_steps=11 format=4 uid="uid://wuw4fvo7s4t5"]
 
 [ext_resource type="Texture2D" uid="uid://bjjc7cjwakwcj" path="res://assets and tutorial files/mystic_woods_free_2.2/sprites/tilesets/grass.png" id="1_o4rtx"]
+[ext_resource type="Script" uid="uid://dxmh2pg3uv4er" path="res://scripts/flat_road.gd" id="1_wm0ol"]
 [ext_resource type="Texture2D" uid="uid://cso1hiadj84kn" path="res://assets and tutorial files/mystic_woods_free_2.2/sprites/tilesets/plains.png" id="2_6fhob"]
 [ext_resource type="Texture2D" uid="uid://c0nwrlwokdlq" path="res://assets and tutorial files/mystic_woods_free_2.2/sprites/objects/objects.png" id="3_v7mfg"]
 [ext_resource type="PackedScene" uid="uid://kcbxjngbpul0" path="res://scenes/player.tscn" id="4_i5e3b"]
@@ -79,6 +80,7 @@ sources/2 = SubResource("TileSetAtlasSource_ma5se")
 size = Vector2(29, 124)
 
 [node name="flat_road" type="Node2D"]
+script = ExtResource("1_wm0ol")
 
 [node name="ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -109,15 +111,18 @@ polygon = PackedVector2Array(34, -119, 448, -94, 452, -172, 925, -169, 924, 30, 
 [node name="player" parent="." instance=ExtResource("4_i5e3b")]
 position = Vector2(407, 391)
 
-[node name="cliffside_exitpoint" type="Area2D" parent="."]
+[node name="flatroad_exitpoint" type="Area2D" parent="."]
 position = Vector2(1420, 379)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_exitpoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flatroad_exitpoint"]
 position = Vector2(-152, 7)
 shape = SubResource("RectangleShape2D_rwtxv")
 
-[node name="cliffside_entryPoint" type="Area2D" parent="."]
+[node name="flatroad_entrypoint" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_entryPoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flatroad_entrypoint"]
 position = Vector2(384.625, 386.5)
 shape = SubResource("RectangleShape2D_rwtxv")
+
+[connection signal="body_entered" from="flatroad_exitpoint" to="." method="_on_flatroad_exitpoint_body_entered"]
+[connection signal="body_entered" from="flatroad_entrypoint" to="." method="_on_flatroad_entrypoint_body_entered"]
