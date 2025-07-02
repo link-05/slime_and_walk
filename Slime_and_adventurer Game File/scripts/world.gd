@@ -13,7 +13,9 @@ func _ready():
 	elif SceneControl.right:
 		$player.position.x = SceneControl.player_enter_world_from_narrowpath_posx
 		$player.position.y = SceneControl.player_enter_world_from_narrowpath_posy
-
+	elif SceneControl.left:
+		$player.position.x = SceneControl.player_world_left_posx
+		$player.position.y = SceneControl.player_world_left_posy
 
 #Checks if the scene changes. 
 func _process(delta):
@@ -52,4 +54,12 @@ func _on_narrow_path_transition_point_body_entered(body: Node2D) -> void:
 		global.scene_to_narrowpath();
 		SceneControl.switch_scene("res://scenes/narrow_path.tscn")
 		SceneControl.enterRight()
+		SceneControl.start_warp_protection()
+
+
+func _on_flat_road_transition_path_body_entered(body: Node2D) -> void:
+	if body.has_method("player") and SceneControl.can_warp == true:
+		global.scene_to_narrowpath();
+		SceneControl.switch_scene("res://scenes/flat_road.tscn")
+		SceneControl.enterLeft()
 		SceneControl.start_warp_protection()

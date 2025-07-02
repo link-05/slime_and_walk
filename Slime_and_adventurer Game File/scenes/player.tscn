@@ -485,10 +485,10 @@ drag_vertical_enabled = true
 [node name="flat_road_camera" type="Camera2D" parent="."]
 position = Vector2(1, 0)
 zoom = Vector2(4, 4)
-limit_left = -70
-limit_top = -70
-limit_right = 300
-limit_bottom = 206
+limit_left = 385
+limit_top = 1500
+limit_right = 1385
+limit_bottom = 700
 limit_smoothed = true
 rotation_smoothing_enabled = true
 

@@ -13,7 +13,7 @@ var camera_sm = LimboHSM
 @onready var flat_road_camera: Camera2D = $flat_road_camera
 
 
-const speed = 100
+var speed = 100
 var current_dir = "none";
 
 func _ready():
@@ -23,17 +23,23 @@ func _ready():
 		$AnimatedSprite2D.play("front_idle")
 	initiate_state_machine()
 func _physics_process(delta):
+	sprint_check()
 	player_movement(delta)
 	enemy_attack()
 	#current_camera()
 	update_health()
-	
 	if health <= 0:
 		player_alive = false #go back to menu or respawn
 		health = 0
 		print("player has been killed")
 		self.queue_free()
 #Two state machine composing of the camera and movements for the player
+
+func sprint_check():
+	if(Input.is_action_pressed('sprint')):
+		speed = 150
+	else:
+		speed = 100
 func initiate_state_machine():
 	main_sm = LimboHSM.new()
 	add_child(main_sm)
@@ -64,12 +70,14 @@ func initiate_state_machine():
 	var camera_update_state = LimboState.new().named("update").call_on_enter(camera_update_state_start).call_on_update(camera_update_state_update)
 	var cliff_state = LimboState.new().named("cliffCM").call_on_enter(cliffCM_start).call_on_update(cliffCM_update)
 	var narrowpath_state = LimboState.new().named("narrowpathCM").call_on_enter(narrowpathCM_start).call_on_update(narrowpathCM_update)
+	var flatroad_state = LimboState.new().named("flatroadCM").call_on_enter(flatroadCM_start).call_on_update(flatroadCM_update)
 	
 	#Adding camera child
 	camera_sm.add_child(world_state)
 	camera_sm.add_child(camera_update_state)
 	camera_sm.add_child(cliff_state)
 	camera_sm.add_child(narrowpath_state)
+	camera_sm.add_child(flatroad_state)
 	camera_sm.initial_state = camera_update_state
 	
 	#transitions for camera
@@ -77,6 +85,7 @@ func initiate_state_machine():
 	camera_sm.add_transition(camera_update_state, world_state, &"to_world")
 	camera_sm.add_transition(camera_update_state, cliff_state, &"to_cliff")
 	camera_sm.add_transition(camera_update_state, narrowpath_state, &"to_narrowpath")
+	camera_sm.add_transition(camera_update_state, flatroad_state, &"to_flatroad")
 
 	camera_sm.initialize(self)
 	camera_sm.set_active(true)
@@ -85,6 +94,8 @@ func initiate_state_machine():
 
 	
 	camera_sm.initial_state = camera_update_state
+	
+	
 func player_movement(delta):
 	if Input.is_action_pressed("attack"):
 		main_sm.dispatch(&"to_attack")
@@ -239,60 +250,77 @@ func attack_update(delta: float):
 
 #Camera states
 	#World state
-func worldCM_start(delta: float):
+func worldCM_start():
 	pass
 	#world_camera.enabled = true
 	#cliffside_camera.enabled = false
 	#flat_road_camera.enabled = false
 	#narrow_path_camera.enabled = false
-func worldCM_update(delta: float):
-	world_camera.enabled = true
-	cliffside_camera.enabled = false
-	flat_road_camera.enabled = false
-	narrow_path_camera.enabled = false
+func worldCM_update(d):
+	#world_camera.enabled = true
+	#cliffside_camera.enabled = false
+	#flat_road_camera.enabled = false
+	#narrow_path_camera.enabled = false
 	if not (global.current_scene == "world"):
 		camera_sm.dispatch(&"state_ended")
 	#Cliff state
-func cliffCM_start(delta: float):
+func cliffCM_start():
 	pass
 	#world_camera.enabled = false
 	#cliffside_camera.enabled = true
 	#flat_road_camera.enabled = false
 	#narrow_path_camera.enabled = false
-
-func cliffCM_update(delta: float):
-	world_camera.enabled = false
-	cliffside_camera.enabled = true
-	flat_road_camera.enabled = false
-	narrow_path_camera.enabled = false
+func cliffCM_update():
+	#world_camera.enabled = false
+	#cliffside_camera.enabled = true
+	#flat_road_camera.enabled = false
+	#narrow_path_camera.enabled = false
 	if not (global.current_scene == "cliffside"):
 		camera_sm.dispatch(&"state_ended")
 	#Camera Update (initial state)
 
-func narrowpathCM_start(delta: float):
+func narrowpathCM_start():
+	pass
+func narrowpathCM_update():
+	#world_camera.enabled = false
+	#cliffside_camera.enabled = false
+	#flat_road_camera.enabled = false
+	#narrow_path_camera.enabled = true
+	if not (global.current_scene == "narrowpath"):
+		camera_sm.dispatch(&"state_ended")
+func flatroadCM_start():
 	pass
 	#world_camera.enabled = false
 	#cliffside_camera.enabled = false
 	#flat_road_camera.enabled = false
 	#narrow_path_camera.enabled = true
-func narrowpathCM_update(delta: float):
-	world_camera.enabled = false
-	cliffside_camera.enabled = false
-	flat_road_camera.enabled = false
-	narrow_path_camera.enabled = true
-	if not (global.current_scene == "narrowpath"):
+func flatroadCM_update():
+	#world_camera.enabled = false
+	#cliffside_camera.enabled = false
+	#flat_road_camera.enabled = false
+	#narrow_path_camera.enabled = true
+	if not (global.current_scene == "flatroad"):
 		camera_sm.dispatch(&"state_ended")
 
 func camera_update_state_start():
+	world_camera.enabled = false
+	cliffside_camera.enabled = false
+	flat_road_camera.enabled = false
+	narrow_path_camera.enabled = false
 	if global.current_scene == "world":
+		world_camera.enabled = true
 		camera_sm.dispatch(&"to_world")
 	elif global.current_scene == "cliffside":
+		cliffside_camera.enabled = true
 		camera_sm.dispatch(&"to_cliff")
 	elif global.current_scene == "narrowpath":
+		narrow_path_camera.enabled = true
 		camera_sm.dispatch(&"to_narrowpath")
+	elif global.current_scene == "flatroad":
+		flat_road_camera.enabled = true
+		camera_sm.dispatch(&"to_flatroad")
 	else:
 		camera_sm.dispatch(&"state_ended")
-		
 func camera_update_state_update():
 	pass
 	

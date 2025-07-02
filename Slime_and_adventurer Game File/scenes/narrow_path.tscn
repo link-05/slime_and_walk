@@ -114,7 +114,7 @@ polygon = PackedVector2Array(642, 31, 648, 48, 636, 46, 51, 46, 49, 34, 19, 36, 
 position = Vector2(1420, 379)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="narrow_path_exitpoint_right"]
-position = Vector2(-152, 7)
+position = Vector2(-132, 4)
 shape = SubResource("RectangleShape2D_rwtxv")
 
 [node name="narrow_path_exitpoint_left" type="Area2D" parent="."]
