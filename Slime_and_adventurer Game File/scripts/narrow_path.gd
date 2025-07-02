@@ -17,8 +17,8 @@ func _on_narrow_path_exitpoint_left_body_entered(body: Node2D) -> void:
 		
 func _on_narrow_path_exitpoint_right_body_entered(body: Node2D) -> void:
 	if body.has_method("player") and SceneControl.can_warp == true:
-		global.scene_to_flatroad();
+		global.scene_to_narrowpath();
 		SceneControl.start_warp_protection()
 		SceneControl.switch_scene("res://scenes/flat_road.tscn")
-		SceneControl.enterLeft()
+		SceneControl.enterRight()
 		

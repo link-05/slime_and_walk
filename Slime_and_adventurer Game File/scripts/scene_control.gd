@@ -14,6 +14,9 @@ var left = false
 #positions for player spawn in world
 var player_start_posx = 114
 var player_start_posy = 109
+#positions for player spawn in world from flatroad
+var player_world_left_posx = 4
+var player_world_left_posy = 33
 #positions for player location in world after leaving cliffside 
 var player_exit_cliffside_posx = 200
 var player_exit_cliffside_posy = 12
@@ -31,10 +34,17 @@ var player_enter_cliffside_posy = 136
 var player_leftenter_narrowpath_posx = 385
 var player_leftenter_narrowpath_posy = 386
 #positions for player to spawn in narrowpath from flatroad
-var player_rightenter_narrowpath_posx = 1256
-var player_rightenter_narrowpath_posy = 388
+var player_rightenter_narrowpath_posx = 1257
+var player_rightenter_narrowpath_posy = 392
 
 #Flatroad specific spawn positions
+#positions for player to spawn in flatroad from narrowroad
+var player_leftenter_flatroad_posx = 385
+var player_leftenter_flatroad_posy = 388
+#positions for player to spawn in flatroad from world
+var player_rightenter_flatroad_posx = 1273
+var player_rightenter_flatroad_posy = 385
+
 
 #Grabs the current scene
 func _ready() -> void:
