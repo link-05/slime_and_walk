@@ -4,7 +4,8 @@
 Including:
 - Multiple scenes and camera change
 - Player movements controlled by LimboAI plugin's state machine
-- Slime movements controlled by LimboAI plugin's behavior tree
+- Random slime movements controlled by LimboAI plugin's behavior tree
+- Slime will chase player when in range
 - A basic combat mechanism
 ##
   #### Asset Pack Credit: https://game-endeavor.itch.io/
