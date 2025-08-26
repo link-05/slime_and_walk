@@ -281,7 +281,7 @@ func cliffCM_update():
 
 func narrowpathCM_start():
 	pass
-func narrowpathCM_update():
+func narrowpathCM_update(unknownArg):
 	#world_camera.enabled = false
 	#cliffside_camera.enabled = false
 	#flat_road_camera.enabled = false
