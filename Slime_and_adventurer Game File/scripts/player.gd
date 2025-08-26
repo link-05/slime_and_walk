@@ -270,7 +270,7 @@ func cliffCM_start():
 	#cliffside_camera.enabled = true
 	#flat_road_camera.enabled = false
 	#narrow_path_camera.enabled = false
-func cliffCM_update():
+func cliffCM_update(unknownArg):
 	#world_camera.enabled = false
 	#cliffside_camera.enabled = true
 	#flat_road_camera.enabled = false
